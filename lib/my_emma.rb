@@ -23,7 +23,8 @@ class MyEmma
   def self.signup(email, parameters={})
     if email_valid?(email)
       parameters.merge! credentials.merge(:emma_member_email => email)
-      Response.new post('/app/view:RemoteSignup', :query => parameters)
+      #use :body instead of :query to include content-length header
+      Response.new post('/app/view:RemoteSignup', :body => parameters)
     end
   end
 
